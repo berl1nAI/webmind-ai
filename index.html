@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebMind AI</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #090b10;
+    color: #f1f5f9;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    padding: 22px 7%;
+    border-bottom: 1px solid #242936;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: #8b7cff;
+}
+
+.badge {
+    color: #a99eff;
+    border: 1px solid #49406e;
+    padding: 7px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+}
+
+main {
+    max-width: 850px;
+    margin: 65px auto;
+    padding: 0 20px;
+}
+
+.tag {
+    color: #a99eff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: clamp(34px, 8vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -2px;
+    margin: 20px 0;
+}
+
+h1 span {
+    color: #9b8cff;
+}
+
+.description {
+    color: #9ca3b5;
+    line-height: 1.7;
+    font-size: 15px;
+    max-width: 600px;
+}
+
+.panel {
+    background: #11141d;
+    border: 1px solid #292e3b;
+    border-radius: 15px;
+    padding: 22px;
+    margin-top: 35px;
+}
+
+label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    background: #090b10;
+    border: 1px solid #34394a;
+    color: white;
+    padding: 15px;
+    border-radius: 9px;
+    font-size: 15px;
+    outline: none;
+    margin-bottom: 17px;
+}
+
+input:focus, textarea:focus {
+    border-color: #8b7cff;
+}
+
+textarea {
+    min-height: 95px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+button {
+    width: 100%;
+    background: #8978ff;
+    color: #080910;
+    font-weight: bold;
+    font-size: 15px;
+    border: none;
+    border-radius: 9px;
+    padding: 16px;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.99);
+}
+
+.note {
+    color: #7f879a;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 13px;
+}
+
+.results {
+    display: none;
+    margin-top: 25px;
+}
+
+.results h2 {
+    font-size: 22px;
+}
+
+.result-card {
+    background: #11141d;
+    border: 1px solid #292e3b;
+    padding: 18px;
+    border-radius: 12px;
+    margin: 12px 0;
+}
+
+.result-card h3 {
+    font-size: 15px;
+    margin-top: 0;
+}
+
+.result-card p {
+    color: #aab1c1;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.status {
+    color: #b4a8ff;
+    font-size: 12px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 15px;
+    color: #626b7d;
+    font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">WebMind<span> AI</span></div>
+    <div class="badge">PROTOTIPO V0.1</div>
+</header>
+
+<main>
+    <div class="tag">Inteligencia web</div>
+
+    <h1>Entendé cualquier<br>
+    <span>sitio web.</span></h1>
+
+    <p class="description">
+        Una herramienta para investigar negocios digitales,
+        evaluar sitios web y descubrir oportunidades de mejora.
+        Nuestro objetivo: convertir información en decisiones.
+    </p>
+
+    <section class="panel">
+        <label for="website">Dirección del sitio web</label>
+
+        <input
+            id="website"
+            type="url"
+            placeholder="https://ejemplo.com"
+            autocomplete="url"
+        >
+
+        <label for="context">¿Qué querés investigar? (opcional)</label>
+
+        <textarea
+            id="context"
+            placeholder="Ejemplo: analizá esta web como si quisiera mejorar su marketing y conseguir más clientes."
+        ></textarea>
+
+        <button id="analyzeButton" onclick="analyzeWebsite()">
+            Preparar análisis →
+        </button>
+
+        <p class="note">
+            Versión inicial: organiza la información para preparar
+            una evaluación. Todavía no navega automáticamente
+            ni utiliza un modelo de inteligencia artificial.
+        </p>
+    </section>
+
+    <section id="results" class="results">
+        <h2>Tu análisis</h2>
+
+        <div class="result-card">
+            <h3>Sitio seleccionado</h3>
+            <p id="siteResult"></p>
+        </div>
+
+        <div class="result-card">
+            <h3>Objetivo de investigación</h3>
+            <p id="contextResult"></p>
+        </div>
+
+        <div class="result-card">
+            <h3>Próximo paso</h3>
+            <p>
+                La dirección y el objetivo ya están preparados.
+                El siguiente componente del proyecto será conectar
+                un sistema capaz de acceder al contenido de la web
+                y analizarlo con inteligencia artificial.
+            </p>
+            <div class="status">FASE 1 · INTERFAZ FUNCIONAL</div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    WebMind AI · Proyecto experimental
+</footer>
+
+<script>
+function analyzeWebsite() {
+    const input = document.getElementById("website");
+    const context = document.getElementById("context");
+    const button = document.getElementById("analyzeButton");
+
+    let address = input.value.trim();
+
+    if (!address) {
+        alert("Primero introducí la dirección de un sitio web.");
+        input.focus();
+        return;
+    }
+
+    if (!/^https?:\/\//i.test(address)) {
+        address = "https://" + address;
+    }
+
+    let parsed;
+
+    try {
+        parsed = new URL(address);
+    } catch (error) {
+        alert("La dirección no parece válida. Revisala e intentá otra vez.");
+        return;
+    }
+
+    if (!["http:", "https:"].includes(parsed.protocol)) {
+        alert("Introducí una dirección web válida.");
+        return;
+    }
+
+    document.getElementById("siteResult").textContent = parsed.href;
+
+    document.getElementById("contextResult").textContent =
+        context.value.trim() ||
+        "Exploración general del sitio web.";
+
+    document.getElementById("results").style.display = "block";
+
+    button.textContent = "Información preparada ✓";
+
+    document.getElementById("results").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+</script>
+
+</body>
+</html>
